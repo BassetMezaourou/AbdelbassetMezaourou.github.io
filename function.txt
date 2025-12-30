@@ -1,0 +1,2371 @@
+
+// Program 1: Generate Random Numbers in Two Arrays, Find Min and Max, and Compare Overall Min/Max
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
+#include <math.h>
+
+{#include <stdio.h>}
+
+
+void array_insert_numbers(int t[], int size )
+{
+		int j;
+    	printf("enter the value in your table = \n");
+		for(j=0;j<size;j++)
+		{
+	     	scanf("%d",&t[j]);
+		}
+}
+
+
+void array_insert_rand_numbers(int t[], int size ,int max )
+{
+		int j;
+    	srand(time(NULL));
+		for(j=0;j<size;j++)
+		{
+	      t[j]=rand()%max;
+		}
+}
+
+
+ void array_brows(int t[], int size )
+{
+		int j;
+		printf("your table is = ");
+		for(j=0;j<size;j++)
+		{
+	     	printf("[%d]",t[j]);
+		}
+}
+
+
+int array_min(int t[], int size )
+{
+		int j;
+		int min=t[0];
+		for(j=0;j<size;j++)
+		{
+			if(t[j]<min)
+			{
+				min=t[j];
+			}
+		}
+	return min;
+}
+
+ 
+ 
+ int array_max_numbers( int t[] , int size )
+ {   
+     int i,max;
+     max=t[0];
+     for(i=0;i<size;i++)
+     {
+        if (t[i]>max)
+         max=t[i];
+     }
+     
+     return max;
+ }
+
+(if we want to have a more time )
+{void wait1(int n)
+{  
+    int i;
+    for(i=0;i<(n*n);i++)
+     pow(i,10);
+}}
+
+
+int main() 	{
+	    const int n=100,k=10 ;
+		int a[n],b[k];
+		
+		int min,max,x,y,min1,max1,i;
+	array_insert_rand_numbers(a,n,1000);
+	array_brows(a,n);
+	max=array_max_numbers(a,n);
+	min=array_min(a,n);
+	printf("\n min=[%d] max=[%d] ",min,max);
+	printf("\n-------------------------------\n");
+	wait1(1000);
+	array_insert_rand_numbers(b,k,1000);
+	array_brows(b,k);
+	max1=array_max_numbers(b,k);
+    min1=array_min(b,k);
+   	printf("\n min=[%d] max=[%d] ",min1,max1);
+   	printf("\n-------------------------------\n");
+   	x=max1;
+   	if(max>max1 ) x=max;
+   	y=min1;
+   	if(min<min1) y=min;
+   	printf("\n min=[%d] max=[%d] ",y,x);
+ 	
+return 0;
+}
+
+// Program 2: Insert Random Integers into a File
+void insertrandint(char path[] , int row , int col ) {
+    int f,i,j;
+    FILE *file;
+    file = fopen(path, "w");
+    if (file == NULL) {
+        printf("unsuccessfully\n");
+    } else {
+        srand(time(NULL));
+        for (i = 0; i < row ; i++)
+		 {
+        	for (j= 0; j < col ; j++) 
+			{
+	            f = rand() % 1000;
+	            fprintf(file, "%d;", f);
+	            
+		     } 
+		     fprintf(file,"\n");
+	     }
+        fclose(file);
+    }
+}
+
+// Program 3: Show File Content
+void showfile(char path[100]) {
+    FILE *file;
+    int i;
+    file = fopen(path, "r");
+    if (file != NULL) {
+        char a[30]; // Fixed-size buffer for reading lines
+        while (fgets(a, sizeof(a), file) != NULL) {
+            
+             	printf("%s", a);
+			 
+        }
+        fclose(file);
+    } else {
+        printf("[ %s ] File does not exist\n", path);
+    }
+}
+
+// Program 4: Show File Content as Matrix
+void showfile_in_matrix(char path[100]) {
+    int i, j, row, col;
+    int a[10][5]; // 2D array to store integers
+    char w[5];
+    FILE *file;
+    char q[100];
+
+    file = fopen(path, "r");
+    if (file != NULL) {
+        row = 0;
+        col = 0;
+        strcpy(w, ""); // Initialize the string
+
+        while (fgets(q, sizeof(q), file) != NULL) {
+            for (i = 0; i < strlen(q); i++) {
+            	
+                if (q[i] != ';' && q[i] != '\0') {
+                    char temp[2] = {q[i], '\0'}; // Create a temporary string to concatenate
+                    strcat(w, temp);
+                } else 
+					{
+	                    if (strlen(w) > 0) 
+							{ // Only copy non-empty strings
+		                        a[row][col] = atoi(w); // Copy the string to the matrix as an integer
+		                        col++;
+		                        if (col >= 5)
+								 { // Move to the next row if column limit is reached
+		                            col = 0;
+		                            row++;
+		                          }
+		                        strcpy(w, ""); // Reset the string
+		                        
+		                    }
+	                }
+            }  
+        } 
+        col = 5;
+         
+        // Print the matrix contents
+        for (i = 0; i < row; i++) {
+            for (j = 0; j < col ; j++) {
+                printf("%d ", a[i][j]);
+            }
+            printf("\n");
+        }
+
+        fclose(file);
+    } else {
+        printf("Your file doesn't exist\n");
+    }
+}
+
+// Program 5: Show File in Sorted Matrix with Min/Max Highlighted
+ void showfile_in_matrix_sorting_min_max(char path[100])  {
+    int i,min,r,k, temp ,j, row, col;
+    int a[10][5]; // 2D array to store integers
+    char w[5];
+    FILE *file;
+    char q[100];
+    bool swap;
+
+    file = fopen(path, "r");
+    if (file != NULL) {
+        row = 0;
+        col = 0;
+        strcpy(w, ""); // Initialize the string
+;
+        while (fgets(q, sizeof(q), file) != NULL) {
+            for (i = 0; i < strlen(q); i++) {
+            	
+                if (q[i] != ';' && q[i] != '\0') {
+                    char temp[2] = {q[i], '\0'}; // Create a temporary string to concatenate
+                    strcat(w, temp);
+                } else 
+					{
+	                    if (strlen(w) > 0) 
+							{ // Only copy non-empty strings
+		                        a[row][col] = atoi(w); // Copy the string to the matrix as an integer
+		                        col++;
+		                        if (col >= 5)
+								 { // Move to the next row if column limit is reached
+		                            col = 0;
+		                            row++;
+		                          }
+		                        strcpy(w, ""); // Reset the string
+		                        
+		                    }
+	                }
+            }  
+        } 
+        col = 5;
+         
+        // Print the matrix contents
+   
+
+        fclose(file);
+    } else {
+        printf("Your file doesn't exist\n");
+    }
+  	
+ for ( i = 0; i < (col); i++)
+ 	{
+	    swap=true;
+		while (swap)
+		{ 
+			swap=false;
+				for (j=0;j<(row-1) ;j++) 
+	             {
+					if(a[j][i]>a[j+1][i])
+						{
+							temp=a[j][i];
+							a[j][i]=a[j+1][i];
+							a[j+1][i]=temp;
+							swap=true;
+						}
+				}
+		}
+     } 
+
+ 	for (j=0;j<row ;j++) 
+{
+    swap=true;
+	while (swap)
+	{ 
+		swap=false;
+		for ( i = 0; i < (col-1); i++)
+			{
+				if(a[j][i]>a[j][i+1])
+					{
+						temp=a[j][i];
+						a[j][i]=a[j][i+1];
+						a[j][i+1]=temp;
+						swap=true;
+					}
+			}
+	}
+}  
+   
+
+ printf("[ showfile_in_matrix_sorting_[min]_[max] ] \n");
+ printf("\n");
+    for (i = 0; i < row; i++) 
+	    {
+            for (j = 0; j < col ; j++)
+			  {  
+			    if ((i==0 && j==0 )|| ((i==(row-1)) && (j==(col-1))) )
+			    {
+			    	printf("[%d]", a[i][j]);
+				}else
+				{
+					printf("%d ", a[i][j]);
+				}
+                
+              }
+            printf("\n");
+        }
+
+  }
+
+// Program 6: Show File in Matrix with Min/Max Positions Highlighted
+ void showfile_in_matrix_min_max(char path[100])  {
+    int i,min,mine,m,M,Min,Max,max,r,k, j, row, col;
+    int a[10][5]; // 2D array to store integers
+    char w[5];
+    FILE *file;
+    char q[100];
+    bool swap;
+
+    file = fopen(path, "r");
+    if (file != NULL) {
+        row = 0;
+        col = 0;
+        strcpy(w, ""); // Initialize the string
+
+        while (fgets(q, sizeof(q), file) != NULL) {
+            for (i = 0; i < strlen(q); i++) {
+            	
+                if (q[i] != ';' && q[i] != '\0') {
+                    char temp[2] = {q[i], '\0'}; // Create a temporary string to concatenate
+                    strcat(w, temp);
+                } else 
+					{
+	                    if (strlen(w) > 0) 
+							{ // Only copy non-empty strings
+		                        a[row][col] = atoi(w); // Copy the string to the matrix as an integer
+		                        col++;
+		                        if (col >= 5)
+								 { // Move to the next row if column limit is reached
+		                            col = 0;
+		                            row++;
+		                          }
+		                        strcpy(w, ""); // Reset the string
+		                        
+		                    }
+	                }
+            }  
+        } 
+        col = 5;
+         
+        // Print the matrix contents
+   
+
+        fclose(file);
+    } else {
+        printf("Your file doesn't exist\n");
+    }
+    Min=0;
+    Max=0;
+    max=0;
+    mine=0;
+  	m=a[Min][mine];
+  	M=a[max][Max];
+ for ( i = 0; i < (col); i++)
+ 	{
+	    swap=true;
+		while (swap)
+		{ 
+			swap=false;
+				for (j=0;j<(row) ;j++) 
+	             {
+					if(a[j][i]<a[Min][mine])
+						{
+							Min=j;
+							mine=i;
+							swap=true;
+						}
+				}
+		}
+     } 
+
+ 	for (j=0;j<row ;j++) 
+{
+    swap=true;
+	while (swap)
+	{ 
+		swap=false;
+		for ( i = 0; i < (col); i++)
+			{
+				if(a[j][i]>a[max][Max])
+					{
+						max=j;
+						Max=i;
+						swap=true;
+					}
+			}
+	}
+}  
+   
+
+ printf("[ showfile_in_matrix_[min]_[max] ] \n");
+ printf("\n");
+    for (i = 0; i < row; i++) 
+	    {
+            for (j = 0; j < col ; j++)
+			  {  
+			    if ((j==mine && i==Min )|| ((j==Max) && (i==max) ))
+			    {
+			    	printf("[%d]", a[i][j]);
+				}else
+				{
+					printf("%d ", a[i][j]);
+				}
+                
+              }
+            printf("\n");
+        }
+        printf("\n");
+       
+        
+        
+        printf("\nMIN[ %d || %d ]--->[%d]\n",Min,mine,a[Min][mine] );
+        printf("\nMAX[ %d || %d ]--->[%d]\n",max,Max,a[max][Max]);
+
+  }
+
+// Program 7: Linked List Creation and Traversal
+[list de chainnee]
+	
+typedef struct etud
+    {
+        int age;
+        struct etud *next;
+        
+    }etud;
+
+etud *p=NULL;
+etud *h=NULL;
+etud *x=NULL;
+
+int i;
+for(i=1;i<=4;i++)
+ {
+     h=(etud *)malloc(sizeof(etud));
+     scanf("%d",&h->age);
+     h->next=NULL;
+     if(i==1){ p=h;x=h;}
+     else
+        {
+            x->next=h;
+            x=h;
+        }
+     
+ }
+h=p;// brows list
+while(h!=NULL)
+ {
+     printf("%d;",h->age);
+     h=h->next;
+ }
+
+// Program 8: Convert Bytes to Higher Units (KB, MB, etc.)
+int unit(int a) {
+    char *unit[] = {"O", "KO", "MO", "GO", "TO", "PO", "EO", "ZO", "YO"};
+    float x;
+    int i;
+    i = 0;
+    x = a;
+    while (x >= 1024) {
+        x = x / 1024;
+        i++;
+    }
+    return printf("[ %d (octet) ]-->[ %.2f (%s)]", a, x, unit[i]);
+}
+int main() {
+    int v;
+    bool swap;
+    char q;
+    swap = true;
+    while (swap) {
+        printf(" enter your size in byte (or 'q' to exit): ");
+        if (scanf("%d", &v) == 1) {
+            unit(v);
+            printf("\n");
+        } else {
+            scanf("%c", &q);
+            if (q == 'q' || q == 'Q') {
+                swap = false;
+            }
+        }
+    }
+    return 0;
+}
+
+// Program 9: Factorial and Permutation Calculation
+int fact(int N)
+{
+	int x,r;
+	x=1;
+	for (r=2;r<=N;r++)
+	x=x*r;
+	return x;
+}
+ 
+int A(int a, int b)
+{
+	int s;
+	s=fact(a)/fact(a-b);
+	return s;
+}
+
+// Program 10: List Directory Contents
+DIR *directory;
+struct dirent *p;
+struct stat file_stat;
+ directory = opendir("D:\\");
+ 
+  if (directory == NULL)
+  {
+  	printf("error opening directory . \n");
+  	return 1;
+  } 
+  
+  while (( p = readdir(directory)) != NULL)
+  {
+  	 
+  	 if (stat(p->d_name , &file_stat)==-1)
+  	 {
+	    printf("error");
+		 
+	   }else 
+	   {
+	   
+  	  if (S_ISDIR(file_stat.st_mode))
+  	  {
+		printf ("\n [%s --> %d] ", p->d_name,p->d_namlen);
+		}
+		}
+  	
+  }
+
+// Program 11: Generate Random Array, Find Max Position Before and After Sorting
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+int m = 0 ;
+
+void array_insert_rand_numbers(int t[], int size, int max) {
+    int j;
+    srand(time(NULL));
+    for (j = 0; j < size; j++) {
+        t[j] = rand() % max;
+    }
+}
+
+int array_max_numbers(int *t, int size) {   
+    int i, max;
+    max = t[0];
+    
+    for (i = 0; i < size; i++) {
+        if (t[i] > max) {
+            max = t[i];
+            m = i;
+        }
+    }
+    return max;
+}
+
+void revers(int *t, int n) {
+    int i, j, c;
+    i = 0;
+    j = n - 1;
+    while (i < j) {
+        c = t[i];
+        t[i] = t[j];
+        t[j] = c;
+        i++;
+        j--;
+    }
+}
+
+void sorting_array(int *t, int n) {
+    int i, j, c;
+    for (i = 0; i < n - 1; i++) 
+  {
+        for (j = 0; j < n - i - 1; j++) {
+            if (t[j] > t[j + 1]) {
+                c = t[j];
+                t[j] = t[j + 1];
+                t[j + 1] = c;
+            }
+        }
+    }
+}
+
+
+int main() {
+    int n, max_pos;
+    int *tab;
+    do {
+        printf("enter the value of box: ");
+        scanf("%d", &n);
+         printf ("\n ");
+    } while (n < 0);
+    tab = (int *)malloc(n * sizeof(int));
+    array_insert_rand_numbers(tab, n, 100000);
+    
+    for (int i = 0; i < n; i++) {
+        printf("%d ", tab[i]);
+    }
+      
+     int max = array_max_numbers(tab, n);
+     printf ("\n ");
+      printf(" \n  position befor sorting TAB [ %d ] = %d ",m,max);
+       printf ("\n ");
+     printf ("\n ------------------------------------ \n");
+      printf ("\n ");
+    
+    
+    sorting_array(tab, n); 
+    for (int i = 0; i < n; i++) {
+        printf("%d ", tab[i]);
+    }
+    
+    int max1 = array_max_numbers(tab, n);
+    
+    printf ("\n ");
+     
+    printf(" \n  position after sorting TAB [ %d ] = %d ",m,max1);
+
+      
+
+    return 0;
+}
+
+// Program 12: Calculate Price with Tax Based on Category
+---------------------------price------------------------
+	float pht;
+    int categorie;
+	printf("give me the price of product withot taxe =");
+	scanf("%f",&pht);
+	printf(" what is the categorie of this product [A] [B] [C] =");
+	scanf ("%d",&categorie);
+	printf("test=%d",categorie);
+	switch(categorie)
+	{
+	 case 1 : 
+	        printf("\n your price TTC is = %.2f",pht*0.07+pht);
+	    	break ;
+	 case 2 : 
+		    printf("\n your price TTC is = %.2f",pht*0.2+pht);
+		    break ;
+	 case 3 : 
+			printf("\n your price TTC is = %.2f",pht*0.25+pht);
+			break ;
+	 default:
+	        printf("\n this categorie does'nt exist\n"); 
+	}
+
+// Program 13: Student Management System (Enter, Display, Admit, Sort, File Operations)
+------------------student---------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <student.h>
+
+
+// Student structure definition
+typedef struct Student{
+    char LN[15];    // Last Name
+    char FN[15];    // First Name
+    int age;        // Age
+    float AG;       // Average Grades
+} Student;
+
+
+
+// Function to enter student information from user input
+void enter_students(Student *s, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        printf("Last Name = ");
+        scanf("%s", s[i].LN);
+        printf("First Name = ");
+        scanf("%s", s[i].FN);
+        printf("Age = ");
+        scanf("%d", &s[i].age);
+        printf("Average Grades = ");
+        scanf("%f", &s[i].AG);
+        printf("\n");
+    }
+}
+
+// Function to display all students
+void display_students(Student *s, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        if (i == 0) {
+            printf("\n--------------- First student ------------------\n");
+        } else if (i == 1) {
+            printf("\n--------------- Second student ------------------\n");
+        } else if (i == 2) {
+            printf("\n--------------- Third student ------------------\n");
+        } else {
+            printf("\n--------------- %d-th student ------------------\n", i + 1);
+        }
+        printf("Last Name = %s\n", s[i].LN);
+        printf("First Name = %s\n", s[i].FN);
+        printf("Age = %d\n", s[i].age);
+        printf("Average Grades = %.2f\n", s[i].AG);
+    }
+}
+
+// Function to check if a student is admitted based on average grade
+bool is_admitted(Student s) {
+    return (s.AG >= 10);
+}
+
+// Function to sort students by grade (descending order)
+void sort_students_by_grade(Student *s, int n) {
+    int i;
+    bool swap = true;
+    Student temp;
+    
+    while (swap) {
+        swap = false;
+        for (i = 0; i < (n - 1); i++) {
+            if (s[i].AG < s[i + 1].AG) {
+                temp = s[i];
+                s[i] = s[i + 1];
+                s[i + 1] = temp;
+                swap = true;
+            }
+        }
+    }
+}
+
+void enter_students_file(char path[1000], Student *s, int n) {
+    int i;
+    FILE *f = fopen(path, "a+");
+    if (!f) {
+        printf("Error opening file!\n");
+        return;
+    }
+    
+    printf("Enter the information of student:\n");
+    for (i = 0; i < n; i++) {
+        printf("Enter Last Name: ");
+        scanf(" %14s", s[i].LN);
+        printf("Enter First Name: ");
+        scanf(" %14s", s[i].FN);
+        printf("Enter Age: ");
+        scanf("%d", &s[i].age);
+        printf("Enter Average Grades: ");
+        scanf("%f", &s[i].AG);
+        
+        fprintf(f, "%s_%s_Age=%d_Average=%.2f\n", 
+                s[i].LN, s[i].FN, s[i].age, s[i].AG);
+    }
+    fclose(f);
+}
+
+// Function to display contents of the file
+void showfile(char path[100]) {
+    FILE *file = fopen(path, "r");
+    if (file) {
+        char line[100];
+        while (fgets(line, sizeof(line), file)) {
+            printf("%s", line);
+        }
+        fclose(file);
+    } else {
+        printf("[ %s ] File does not exist\n", path);
+    }
+}
+
+// Function to search students by last name in file
+void search_student_file(char path[100], char last_name[15]) {
+    FILE *file = fopen(path, "r");
+    if (file) {
+        char ln[15], fn[15];
+        int age;
+        float ag;
+        int find = 0;
+        
+        while (fscanf(file, "%14[^_]_%14[^_]_Age=%d_Average=%f\n", 
+                     ln, fn, &age, &ag) == 4) {
+            if (strcmp(ln, last_name) == 0) {
+                if (find == 0) {
+                    printf("Students found with last name %s:\n", last_name);
+                }
+                printf("\nStudent %d:\n", find + 1);
+                printf("Last Name: %s\n", ln);
+                printf("First Name: %s\n", fn);
+                printf("Age: %d\n", age);
+                printf("Average Grades: %.2f\n", ag);
+                find++;
+            }
+        }
+        if (!find) {
+            printf("No students with last name %s found.\n", last_name);
+        }
+        fclose(file);
+    } else {
+        printf("[ %s ] File does not exist\n", path);
+    }
+}
+
+// Function to enter students and append to binary file
+void enter_students_file_binary(char path[1000], Student *s, int n) {
+    int i;
+    FILE *f = fopen(path, "ab+");  // Open in binary append mode
+    if (!f) {
+        printf("Error opening file!\n");
+        return;
+    }
+    
+    printf("Enter the information of student:\n");
+    for (i = 0; i < n; i++) {
+        printf("Enter Last Name: ");
+        scanf(" %14s", s[i].LN);
+        printf("Enter First Name: ");
+        scanf(" %14s", s[i].FN);
+        printf("Enter Age: ");
+        scanf("%d", &s[i].age);
+        printf("Enter Average Grades: ");
+        scanf("%f", &s[i].AG);
+        
+        // Write the entire Student struct as binary data
+        fwrite(&s[i], sizeof(Student), 1, f);
+    }
+    fclose(f);
+}
+
+// Function to display contents of the binary file
+void showfile_binary(char path[100]) {
+    FILE *file = fopen(path, "rb");  // Open in binary read mode
+    if (file) {
+        Student s;
+        // Read Student structs one by one
+        while (fread(&s, sizeof(Student), 1, file) == 1) {
+            // Display the struct contents in a readable format
+            printf("%s_%s_Age=%d_Average=%.2f\n", 
+                   s.LN, s.FN, s.age, s.AG);
+        }
+        fclose(file);
+    } else {
+        printf("[ %s ] File does not exist\n", path);
+    }
+}
+
+// Function to search students by last name in binary file
+void search_student_file_binary(char path[100], char last_name[15]) {
+    FILE *file = fopen(path, "rb");  // Open in binary read mode
+    if (file) {
+        Student s;
+        int find = 0;
+        
+        // Read Student structs one by one
+        while (fread(&s, sizeof(Student), 1, file) == 1) {
+            if (strcmp(s.LN, last_name) == 0) {
+                if (find == 0) {
+                    printf("Students found with last name %s:\n", last_name);
+                }
+                printf("\nStudent %d:\n", find + 1);
+                printf("Last Name: %s\n", s.LN);
+                printf("First Name: %s\n", s.FN);
+                printf("Age: %d\n", s.age);
+                printf("Average Grades: %.2f\n", s.AG);
+                find++;
+            }
+        }
+        if (!find) {
+            printf("No students with last name %s found.\n", last_name);
+        }
+        fclose(file);
+    } else {
+        printf("[ %s ] File does not exist\n", path);
+    }
+}
+
+float print_avrge(char path[1000])
+{
+    int i,sum=0,num,cpt=0;
+    FILE* f;
+    float avr;
+    f=fopen(path,"r");
+      while(fscanf(f,"%d",&num)==1)
+      {
+          sum=sum+num;
+          cpt++;
+          
+      }
+
+         avr=(float)sum/cpt;
+         fclose(f);
+         return avr;
+}
+int main() {
+    int e, k;
+    printf("Enter number of students you will add: ");
+    scanf("%d",&e);
+
+    Student *etudiant = malloc(e * sizeof(Student));
+    if (!etudiant) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    char t[100];
+    printf("Enter your path of file: ");
+    scanf(" %99s", t);
+    
+
+    enter_students_file_binary(t, etudiant, e);
+    printf("\n                          -----------------students_file----------------- \n");
+    printf("Enter 1 to view all students, 0 to search for a specific student: ");
+    scanf("%d", &k);
+
+
+    if (k == 1) {
+        showfile_binary(t);
+        
+    } else {
+        char last_name[15];
+        printf("Enter the last name of the student to search: ");
+        scanf(" %14s", last_name);
+        search_student_file_binary(t, last_name);
+    }
+      print_avrge(t);
+   
+
+    free(etudiant);
+    return 0;
+}
+
+// Program 14: Enter Array, Find Min/Max, Sort, and Display
+----------------------program----------------
+                                      printf(" enter the value of tayble and we calculat the max and min then we tuke the numbers in order ");
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+                                
+int main() {
+    bool swap;
+    int i,y,temp,n;
+    printf("give me the size of your table =");
+    scanf("%d",&n);
+    int A[n];
+     // const int n=5;
+    	printf("enter the value in your table = \n");
+					for (i=0;i<n;i++)
+
+					{
+						scanf("%d",&A[i]);
+					}
+					for (i=0;i<n;i++)
+					{
+						printf("[%d]\n",A[i]);
+					}
+				int min=A[0];
+				int max=A[0];
+					y=0;
+					for(i=1;i<(n);i++) 
+					{
+						if(A[i]<min)
+						{
+							min=A[i];
+						}
+					}	
+					for(i=1;i<(n);i++)
+					{	
+						if(A[i]>max)
+						{
+							max=A[i];
+						}
+					}
+					printf("Min value: %d\n", min);
+				    printf("Max value: %d\n", max);
+					swap=true;
+					while (swap)
+					{ 
+						swap=false;
+						for ( i = 0; i < (n-1); i++)
+							{
+								if(A[i]>A[i+1])
+									{
+										temp=A[i];
+										A[i]=A[i+1];
+										A[i+1]=temp;
+										swap=true;
+									}
+							}
+					}
+					
+
+
+                                        {
+						printf("your table has this correct value = \n ");
+						for ( i = 0; i < n; i++)
+						{
+						 printf("[%d]",A[i]);
+						}
+						
+					}					
+					
+					
+    return 0;
+}
+
+// Program 15: Find Max/Min of Three Numbers and Compute Max/Min Ratio
+                                                           printf("we affiched the max and min then we calcule the sum of max/min");
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {	 
+	{int a,b,c,max,min,s;
+     printf("give me a value of a,b,c =");
+     scanf("%d %d %d",&a,&b,&c);
+     max=0;min=0;
+     if(a==b && a==c && b==c ) 
+          {
+          max=a;
+          min=a;
+          }
+             if(a>=b && a>=c)
+             { if(b>c)
+               {
+        	    max=a;
+                min=c;
+           	   }else
+               	   { 
+            	   max=a;
+                   min=b;
+                   }}
+             if(b>=a && b>=c)
+              {if(a>c)
+               {
+        	    max=b;
+                min=c;
+        	   }else{
+             	     max=b;
+                     min=a;
+        	        }}
+        	 if(c>=a && c>=b)
+                 {if(a>b)
+                   {
+                    max=c;
+                    min=b;
+            	   }else 
+            	        {
+                        max=c;
+                        min=a;
+        	            }}
+       printf("your max is [%d] and your min is [%d]",max,min);
+        if (min!=0)
+        {
+           s=(max / min);
+           printf("your s=[%d]",s);
+        }else
+            {
+             printf(" math error ");   
+            } 
+	 } 
+    return 0;
+}
+
+// Program 16: Convert Number to Month Name Using Switch
+                                                                               printf("switch / the month");
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+    int x;
+    bool basset;
+    basset=true;
+    while (basset) { // Infinite loop, will break with condition
+        printf("Give me the number of the month (enter 0 to exit): ");
+        scanf("%d", &x);
+
+       if (x == 0) {
+            break; // Exit the loop if user inputs 0
+        } 
+
+        switch (x) {
+            case 1: printf("Your month is January\n"); break;
+            case 2: printf("Your month is February\n"); break;
+            case 3: printf("Your month is March\n"); break;
+            case 4: printf("Your month is April\n"); break;
+            case 5: printf("Your month is May\n"); break;
+            case 6: printf("Your month is June\n"); break;
+            case 7: printf("Your month is July\n"); break;
+            case 8: printf("Your month is August\n"); break;
+            case 9: printf("Your month is September\n"); break;
+            case 10: printf("Your month is October\n"); break;
+            case 11: printf("Your month is November\n"); break;
+            case 12: printf("Your month is December\n"); break;
+            default: printf("Error: Invalid month number\n"); break;
+        }
+    }
+
+    return 0;
+}
+
+// Program 17: Reverse a String (Mirror)
+                                                                               printf("do a mirror");
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+        int i,x;
+        const int max=6;	
+        char t[max];
+         printf("give me you word");
+         scanf("%s",t);
+        printf("\n valeur = %s ", t);
+        for(i=0;i<max;i++)
+         printf("[%c]",t[i]);
+        for(i=0;i<(max/2);i++)
+        {x=t[i];
+        t[i]=t[max-i-1];
+        t[max-i-1]=x;
+}
+printf("\n value is %s",t);
+	return 0;
+}
+
+// Program 18: Perform All Basic Arithmetic Operations
+                                                                            printf ("all operateur ");
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+float A,B,C,D,E,x,y;
+	printf("enter a value of x,y in order=\n");
+	scanf("%f\n",&x);
+	scanf("%f",&y);
+	A=x+y;
+	B=x-y;
+	C=x*y;
+	D=x/y;
+	E=pow(x,y);
+	printf("you result fo \n [addition is = %.2f] \n [Subtraction is = %.2f] \n [multiplication is = %.2f] \n [divition is = %.2f] \n [power is = %.2f ] ",A,B,C,D,E);
+    return 0;
+}
+
+// Program 19: Calculate Volume of a Sphere
+                                                                                printf("volume");
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+   float R,V;
+	const float pi=3.14159265359;
+	printf("give me the radius of ball=");
+	scanf("%f/n",&R);
+	V=(4*pi*pow(R,3))/3;
+	printf("the  is = %.2f",V);
+
+    return 0;
+}
+
+// Program 20: Input Name and Age
+                                                                               printf("age and name");
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+
+int main() {
+	int age;
+	char nom[20] ;
+	printf("give me your nom and your age in order =\n");
+	fflush(stdin);
+		scanf("%s",nom);
+	scanf("%d",&age);
+	printf("wellcome %s your age is %d years old\n",nom,age);
+    return 0;
+}
+
+// Program 21: Calculate Area and Perimeter of Rectangle
+                                                                              printf("area and perimeter);
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+	 float pr,su,lan,wid;
+//	 float for any number containing a comma is inserted
+  printf("give me languor of rectangle=");
+  scanf("%f",&lan);
+  printf("give me width of rectangle=");
+  scanf("%f",&wid);
+  pr=(lan+wid)*2;
+  su=lan*wid;
+  
+   printf("the perimeter of the rectangle is = %.3f and the surface is = %.3f",pr,su);/*We put %.3, 5, or any possible number, which expresses the number we want behind the comma*/
+  
+    return 0;
+}
+
+// Program 22: Compute PGCD Using Euclid's Algorithm
+                                                                            ptintf(" pgcd Euclid's algorithms ");
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+    int a,b,x,y,r;
+   printf("enter the value of A and B = ");
+   scanf("%d %d",&a,&b);
+   x=a;
+   y=b;
+   printf("your PGCD ( %d , %d )",x,y);
+   r=a%b;
+   while(r!=0)
+   { 
+       a=b;
+       b=r;
+       r=a%b;
+        }
+   printf(" = %d",b);
+
+    return 0;
+}
+
+// Program 23: Binary Search in Sorted Array
+                                                                   printf("search");
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+int a[15];
+int i,j,middle,x,n;
+bool found;
+do{
+    printf("enter a  real value of the array \n");
+    scanf("%d",&n);
+}while (n<0 || n>15);
+printf("enter the value of the array = \n");
+for (i=0;i<n;i++)
+{ printf("A[%d]=",i);
+scanf("%d",&a[i]);
+}
+printf("enter the value of x =");
+scanf("%d",&x);
+i=0;
+j=n-1;
+found=false;
+while (i<=j && found==false)
+{middle = (i+j)/2;
+if(x== a[middle])
+found=true;
+else
+if (x>a[middle])
+ i=middle+1;
+ else 
+ j=middle-1;}
+ if (found==true)
+  printf("the value exist in %d",middle);
+  else 
+  printf("valeu doesnt exist ");
+ 
+return 0;
+}
+
+// Program 24: Enter Array, Find Min/Max, Sort, and Binary Search
+                                         printf(" enter the value of tayble and we calculat the max and min then we tuke the numbers in order  and Search");
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() { bool swap,found;
+    int i,y,temp,n,j,x,middle;
+    printf("give me the size of your table =");
+    scanf("%d",&n);
+    int A[n];
+     // const int n=5;
+    	printf("enter the value in your table = \n");
+				for (i=0;i<n;i++)
+					{ 
+					  printf("A[%d]=",i);
+					  scanf("%d",&A[i]);
+					}
+				int min=A[0];
+				int max=A[0];
+					y=0;
+					for(i=1;i<(n);i++) 
+					{
+						if(A[i]<min)
+						{
+							min=A[i];
+						}
+					}	
+					for(i=1;i<(n);i++)
+					{	
+						if(A[i]>max)
+						{
+							max=A[i];
+						}
+					}
+					printf("Min value: %d\n", min);
+				    printf("Max value: %d\n", max);
+					swap=true;
+					while (swap)
+					{ 
+						swap=false;
+						for ( i = 0; i < (n-1); i++)
+							{
+								if(A[i]>A[i+1])
+									{
+										temp=A[i];
+										A[i]=A[i+1];
+										A[i+1]=temp;
+										swap=true;
+									}
+							}
+					}
+					{
+						printf("your table has this correct value = \n ");
+						for ( i = 0; i < n; i++)
+						{
+						 printf("[%d]",A[i]);
+						}
+						
+					}
+					printf("enter the value of x =");
+                    scanf("%d",&x);
+						i=0;
+						j=n-1;
+						found=false;
+						while (i<=j && found==false)
+						{
+							middle = (i+j)/2;{
+											if(x== A[middle])
+											{
+											 found=true;
+											}
+											else
+												{
+												 if (x>A[middle])
+												 {
+												 	i=middle+1;
+												 }
+												 else
+												 {
+											    	 j=middle-1;
+												 } 
+												   
+												}
+												
+								         	 }
+						 }
+						 if (found==true)
+						 {
+						 	printf("the value exist in %d",middle);
+						 }
+						 else
+						 {
+						 	printf("valeu doesnt exist ");
+						 } 
+						  
+    return 0;
+}
+
+// Program 25: Merge Two Arrays, Sort Evens First Then Odds
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    const int max1 = 100, max2 = 100, max3 = 200;
+    int t1[max1], t2[max2], t[max3];
+    int i, m, n, z, w, a, s, swap, x;
+
+
+    printf("Give me the size of t1: ");
+    scanf("%d", &n);
+    printf("Give me the size of t2: ");
+    scanf("%d", &m);
+
+    for (i = 0; i < n; i++) {
+        printf("t1[%d]: ", i);
+        scanf("%d", &t1[i]);
+    }
+    for (i = 0; i < m; i++) {
+        printf("t2[%d]: ", i);
+        scanf("%d", &t2[i]);
+    }
+
+    for (i = 0; i < n; i++) {
+        t[i] = t1[i];
+    }
+    for (i = 0; i < m; i++) {
+        t[n + i] = t2[i];
+    }
+
+    z = 0;
+    for (i = 0; i < (m + n); i++) {
+        if (t[i] % 2 == 0) {
+            a = t[z];
+            t[z] = t[i];
+            t[i] = a;
+            z = z + 1;
+            x = z ;
+        }
+    }
+     swap=1;
+    while (swap){
+	
+     for (i = x; i < (m + n)-1; i++) {
+     	swap=0;
+        if (t[x+i] > t[x+i+1]) {
+            s = t[i];
+            t[i]=t[i+1];
+			t[i]=s;
+			swap=1;
+        }
+        
+    }
+	}
+
+    w = x;
+    for (i = 0; i < (m + n); i++) {
+        if (t[i] % 2 != 0) {
+            t[w] = t[i];
+            w = w + 1;
+        } 
+    }
+   
+
+    printf("Sorted array with evens first and odds last:\n");
+    for (i = 0; i < (m + n); i++) {
+        printf("    t[%d]=%d ",i,t[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+// Program 26: Convert Number to Base N
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    const int max=100;
+    int t[max];
+    int i, x, n, z, swap;
+    
+    printf("give e number if you want to convert = ");
+    scanf("%d", &x);
+    printf("give me your bas n = ");
+    scanf("%d", &n);
+    
+    swap = 1; 
+    i = 0;
+    
+    while(swap) {
+        swap = 0;
+        t[i] = x % n;
+        z = x / n;
+        if(z == 0) {
+            swap = 0;
+        } else {
+            swap = 1;
+            x = z; // Update x for next iteration
+        }
+        i++;
+    }
+    
+    printf("your number in base %d is = ", n);
+    for(i = i - 1; i >= 0; i--) {
+        printf("%d", t[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+// Program 27: Compute PGCD Using Subtraction Method
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int a,b,swap,c;
+    printf("give me the valo of A =");
+    scanf("%d",&a);
+   printf("give me the valo of B =");
+    scanf("%d",&b);
+    swap=1;
+    while(swap)
+    {if(a>b)
+	    {
+	    	c=a-b;
+	    	a=b;
+	    	b=c;
+		}else  
+		{
+			c=b-a;
+	    	b=a;
+	    	a=c;
+		}
+		if(c==0)
+		{
+		 swap=0;
+		}else{swap=1;
+		}  
+	} 
+	if (a>b)
+	{printf("pgcd is = %d",a);
+	
+	}else printf("pgcd is = %d",b);
+    return 0;
+}
+
+// Program 28: Add and Multiply Two Arrays
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+
+int main() {
+ const int n=3;
+ int t[n];
+ int a[n];
+ int b[n];
+ int j[n];
+ int   i;
+  
+  printf("enter the value in your table \n");
+  for(i=0;i<n;i++)
+  {
+   printf("t[%d]=",i);
+   scanf("%d",&t[i]);
+  }
+   for(i=0;i<n;i++)
+  {
+   printf("A[%d]=",i);
+   scanf("%d",&a[i]);
+  }
+  for(i=0;i<n;i++)
+  {
+   b[i]=a[i]+t[i];
+   j[i]=a[i]*t[i];
+  }
+  for(i=0;i<n;i++) 
+  {
+      printf ("tabel one=T[%d]=%d \n tabel two=A[%d]=%d \n sum tab=B[%d]=%d  \n  multi tab=J[%d]=%d \n",i,t[i],i,a[i],i,b[i],i,j[i]);
+  }
+    return 0;
+}
+
+// Program 29: Search Value in Array and Count Occurrences
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int main() { 
+    const int y = 5;
+    int t[y];
+    int i,x, n;
+    bool basset;
+    
+    while(true) {
+        printf("Enter the values for your array (5 values): \n");
+        for (i = 0; i < y; i++) {
+            scanf("%d", &t[i]);
+        }
+
+        printf("Enter the value you want to search: \n");
+        scanf("%d", &n);
+
+        basset = true;
+        x=0;
+        while (basset) {
+            for (i = 0; i < y; i++) {
+                if (t[i] == n) { // Correct comparison
+                    printf("Your value %d is found in the position t[%d]\n", n, i);
+                    basset = false;
+                  x=x+1;
+                }  
+            }
+            printf("%d exict inthe  table %d ons",n,x);break;}
+
+            if (basset) {
+                printf("Your value %d doesn't exist\n", n);
+                basset = false; // Ensures the loop exits
+            }
+        
+        printf(" ----------------------------------- \n");
+    } 
+
+    return 0;
+} 
+
+// Program 30: Student Grades and Find Top Student
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int main() { 
+   const int n = 3, y = 3;
+   char t[n][50]; // Assuming the names and modules can be up to 50 characters long
+   char a[y][50];
+   float m[y];
+   float v[n];
+   int i, j, s, maxIndex;
+  
+   printf("Enter the names of students:\n");
+   for (i = 0; i < n; i++) {
+       scanf("%s", t[i]);
+       s = 0;
+       printf("Enter the names of modules and their respective grades for %s:\n", t[i]);
+       for (j = 0; j < y; j++) {
+           scanf("%s %f", a[j], &m[j]);
+           s += m[j];
+       }
+       v[i] = s / (float)y;
+   } 
+  
+   maxIndex = 0;
+   for (i = 1; i < n; i++) {
+       if (v[i] > v[maxIndex]) {
+           maxIndex = i;
+       }
+   }
+
+   printf("The excellent student is %s with an average of %.2f\n", t[maxIndex], v[maxIndex]);
+   
+   return 0;
+}
+
+// Program 31: Sort Rows in 2D Array (Bubble Sort)
+for (j=0;j<row ;j++) 
+{
+    swap=true;
+	while (swap)
+	{ 
+		swap=false;
+		for ( i = 0; i < (col-1); i++)
+			{
+				if(A[j][i]>A[j][i+1])
+					{
+						temp=A[j][i];
+						A[j][i]=A[j][i+1];
+						A[j][i+1]=temp;
+						swap=true;
+					}
+			}
+	}
+}
+
+// Program 32: Selection Sort for Rows in 2D Array
+for (r=0;r<row;r++)
+{
+
+ for (i=0;i<(col-1);i++)
+ {
+ 	k=i;
+ 	for (j=i+1;j<col;j++)
+ 	{ 
+ 	 if (A[r][k]>A[r][j]) k=j;
+	 }
+	 min =A[r][k];
+	 A[r][k]=A[r][i];
+	 A[r][i]=min;
+	 
+ }
+ }
+
+// Program 33: Linked List Operations (Add, Add with Condition, Remove, Show, Free, Search, Swap)
+-------------------list-----------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+typedef struct etud 
+{
+    int age ;
+    struct etud *next;
+}etud ;
+
+int add(etud **hd,int n)
+{
+    if (*hd == NULL)//head empty
+    {
+        *hd = (etud*)malloc(sizeof(etud));//allocat new head  
+           if (*hd == NULL) //unsuccesefull allocation 
+                {
+                    printf("error");
+                    return 0;
+                }
+    // in this step head exict and creat
+      (*hd)->age=n;
+    }else //we have deffrent list r
+    {
+        etud *p=*hd;
+        while(p->next!=NULL) p=p->next;//fin de list
+        p->next = (etud*)malloc(sizeof(etud));
+        p=p->next;
+        p->next = NULL;
+        p->age = n;
+    }
+   
+    
+}
+
+int addcondition(etud **hd,int n,int c)
+{
+    if (*hd == NULL)//head empty
+    {
+       *hd = (etud*)malloc(sizeof(etud));//allocat new head  
+           if (*hd == NULL) //unsuccesefull allocation 
+                {
+                    printf("error");
+                    return 0;
+                }
+    // in this step head exict and creat
+      (*hd)->age=n;
+    }else //we have deffrent list r
+    {
+        etud *p=*hd;
+        etud *b=NULL;
+        while(p->next!=NULL && p->age != c) p=p->next;//fin de list
+        
+        b = (etud*)malloc(sizeof(etud));
+        b->next = p->next ;
+        p->next=b;
+        b->age = n;
+    }
+   
+    
+}
+
+int removecondition(etud **hd,int c)
+{
+    if (*hd == NULL) return 0;//head empty
+        etud *p=*hd;
+        etud *b=*hd;
+         if(p->age == c)
+        { 
+            *hd = (*hd)->next;//*hd = p->next
+             free (p);
+            return 0;
+        }
+        while(p->next!=NULL && p->age != c)
+        {
+            b=p;
+            p=p->next;
+        }
+        if (c == p->age) 
+        {
+         b->next = p->next;
+         free (p);   
+        }
+}
+
+void showlist(etud *hd)
+{
+    while (hd!=NULL)
+    {
+        printf("[%p // %d]",hd,hd->age);
+        hd=hd->next;
+    }
+}
+
+void freelist(etud **hd)
+{  etud *a;
+    while (*hd!=NULL)
+     {  
+         a=(*hd)->next;
+         free(*hd);
+         *hd=a;
+     }
+    
+}
+ 
+ etud* search(etud *hd)
+ {   etud* address=NULL; 
+     int age;
+  if (hd == NULL) return NULL;
+      age = hd->age;
+      address = hd ;
+     while(hd->next != NULL  )
+     {  
+          hd = hd->next;
+         if( age > hd->age )
+         {
+             age = hd->age;
+             address = hd ;
+         }
+     }
+     return address;
+ }
+ 
+ etud* swaplist(etud **hdd) {
+    bool swap = true;
+    etud *y = NULL;
+    etud **hd = hdd;  // Keep double pointer
+    while (swap) {
+        swap = false;
+        while ((*hd) != NULL && (*hd)->next != NULL) {  // Check current node and next
+            if ((*hd)->age > (*hd)->next->age) {
+                y = (*hd)->next->next;
+                (*hd)->next->next = (*hd);
+                (*hd)->next = y;
+                swap = true;
+            }
+            hd = &((*hd)->next);  // Move to next node (using pointer-to-pointer)
+        }
+        hd = hdd;  // Reset to head for next pass
+    }
+    return *hdd;  // Return updated head
+}
+ 
+
+
+int main() {
+    etud *head = NULL;
+    etud *adr=NULL;
+    add(&head,5);
+    add(&head,20);
+    add(&head,10);
+    add(&head,50);
+    add(&head,100);
+    add(&head,70);
+   
+   showlist(head);
+   printf("\n-------------\n");
+   
+  // addcondition(&head,100,30);
+ //  showlist(head);
+ //  printf("\n-------------\n");
+   //removecondition(&head,20);
+   //showlist(head);
+   
+   /* adr = search(head);
+   if(adr != NULL )
+   {
+       printf(" %p || %d",adr,adr->age);
+   } else printf (" empty list ");*/
+   
+  swaplist(&head);
+  printf("\n-------------\n");
+  showlist(head);
+     freelist (&head);
+  // showlist(head);
+return 0;
+}
+
+// Program 34: Dynamic Matrix Fill, Print, Max, and Min per Line
+------------------/////////----
+#include <stdio.h>
+#include <stdlib.h>
+
+void fillmat(int **mat, int n, int m)
+{
+    int j, i;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            scanf("%d", &mat[i][j]);
+        }
+    }
+}
+
+void printmat(int **mat, int n, int m)
+{
+    int j, i;
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
+            printf("%d ", mat[i][j]); 
+        }
+        printf("\n");
+    }
+}
+
+int maxmat(int **mat, int N, int M)
+{
+    int max, i, j;
+     
+    max = mat[0][0];
+    for (i = 0; i < N; i++)
+    {
+        for (j = 0; j < M; j++)
+        {
+            if (max < mat[i][j])
+                max = mat[i][j];
+        }
+    }
+    return max;
+}
+
+void minmat(int **mat, int N, int M)
+{
+    int min, i, j, k, t;
+    t = 0;
+    min = mat[0][t];
+    for (i = 0; i < N; i++)
+    { 
+        for (j = 0; j < M; j++)
+        {      
+            if (min > mat[i][j])
+                min = mat[i][j];
+        }
+        printf("\n  line [ %d ] -->> Minimum value  [ %d ]\n", i,  min);
+        t++;
+        if (t < N) min = mat[t][0];  
+    }
+}
+
+int main()
+{
+    int n, m, i;
+    int **T;
+
+    printf("enter the ROW sizeof matrix = ");
+    scanf("%d", &n);
+    printf("enter the col sizeof matrix = ");
+    scanf("%d", &m);
+    
+    T = (int **)malloc(n * sizeof(int *));
+    for(i = 0; i < n; i++)
+        T[i] = (int *)malloc(m * sizeof(int));
+        
+    printf("Enter your value in matrix: \n");
+
+    fillmat(T, n, m);
+
+    printf("\nyour matrix is \n");
+    printmat(T, n, m);
+
+    int max = maxmat(T, n, m); 
+    printf("\n Maximum value in matrix: %d\n", max);
+    
+    minmat(T, n, m);
+
+    
+    for(i = 0; i < n; i++)
+        free(T[i]);
+    free(T);
+
+    return 0;
+}
+
+// Program 35: Show Error Message Loop Until 'x' Pressed
+-------vrs------
+#include <stdio.h>
+#include <stdbool.h>
+#include <windows.h>
+#include <conio.h>
+
+void showError() {
+    MessageBox(NULL, "ERROR IN YOUR DEVICE", "Error", MB_OK | MB_ICONERROR);
+}
+
+int main() {
+    bool error = true;
+    char input;
+
+    while (error) {
+        showError();
+        Sleep(100); // Sleep for 100 milliseconds
+
+        if (_kbhit()) {
+            input = _getch();
+            if (input == 'x' || input == 'X') {
+                error = false; // Exit the loop if 'x' or 'X' is pressed
+            }
+        }
+    }
+
+    return 0;
+}
+
+// Program 36: Linked List Utilities (Print, Size, Find, Add, Create, Reverse, Remove, Clean)
+--------new------------
+#include <stdio.h>
+
+
+void setval (list* p,int val) { p->val = val;}
+void setnext (list* p,list* q) { p->next = q;}
+void init (list* p) { p->next = NULL;}
+list* getnext (list* p) { return p->next ;}
+int  getval (list* p) { return p->val ;}
+
+typedef struct list
+{
+	int val;
+	struct list * next;
+	
+}list;
+
+
+
+
+//a. PrintLL: qui permet d’afficher les éléments d’une liste de gauche à droite 
+
+void PrintLL (list* p)
+{
+    if(p == NULL) { printf("\n EMPTY-LIST \n"); return; }
+    while(p != NULL)
+        {   printf("[ %d ]-_->",getval(p));
+	        p = getnext(p);    }
+}
+
+
+
+//b. SizeLL : qui permet de calculer la longueur de la liste. 
+
+int sizell (list* p)
+	{
+		int i=0;
+	    while(p != NULL)
+		   	  { i++;
+		   	    p = getnext(p); }
+		return i;
+	}
+
+
+//c. FindLL : qui permet de rechercher le maillon contenant la valeur « v » dans la liste.
+
+list* FindLL (list* p, int val)
+{
+	while(p != NULL)
+			{
+			 if(val == getval(p)) return p;
+		     p = getnext(p); 
+			}
+	return p;	 	
+}
+
+
+//d. FindPosLL : qui permet de rechercher le maillon qui se trouve à la position « k ». 
+
+list* FindPosLL (list* p, int k)
+{
+	while(p != NULL && k > 1)
+			{ k--;
+		      p = getnext(p);
+			}
+	return p;	 	
+}
+
+//e. AddLL : qui permet d'insérer une valeur « v » dans la liste. 
+  
+  //e. Addfirst : qui permet d'insérer une valeur « v » dans la liste. 
+    void Addfirst (list* *head,int val)
+		{
+		    list* q;
+		    q=(list*)malloc(sizeof(list));
+		    setval(q,val);
+		    setnext(q,*head);
+		    *head = q;
+		}
+		
+
+  //e. AddEnd : qui permet d'insérer une valeur « v » dans la liste.
+	void AddEnd (list* *head,int val)
+	  {
+	    list* p;
+	    p=(list*)malloc(sizeof(list));
+	    setval(p,val); 
+	    init(p);
+		  list* q; q = *head;
+		   if (*head == NULL) { *head = p; return; }
+	       while (getnext(q) != NULL) q = getnext(q);
+		  setnext(q,p);
+      }	
+
+//f. AddPosLL : qui permet d'insérer une valeur « v » à la position « k ».
+
+ void AddPosLL (list* *head, int val ,int k)
+ {  
+   if(sizell (*head) < k){  printf ("\n k >>> sizeof-list \n");  return;}
+   if(k <= 0) { printf ("\n ERROR : 0 < k <= N \n");return ; }
+   if(k == 1){ Addfirst(head,val); return;}
+   if(sizell (*head) == k){ AddEnd(head,val);  return;}
+	list* A; A = FindPosLL (*head,(k-1));
+    list* p;
+    p=(list*)malloc(sizeof(list));
+    setval(p,val);
+    setnext(p,getnext(getnext(A)));
+ 	setnext(A,p);
+ }
+ 
+//CreateLL: qui permet de construire la liste à partir de n données lues.
+
+list* CreateLL(int n)
+{
+    list* head = NULL; 
+    int val, i;
+    if(n <= 0) {
+        printf("\n ERROR : N <= 0\n");
+        return NULL;
+    }
+    printf("Enter-[%d]-values-list : ",n);
+    scanf("%d", &val);
+    Addfirst(&head, val);
+    for(i = 1; i < n; i++) {
+        scanf("%d", &val);
+        addend(&head, val);
+    }
+    return head;
+}
+
+//ReverseLL: qui permet d’inverser la liste
+
+list* ReverseLL(list* head) {
+    if (head == NULL || getnextp(head) == NULL) {
+        return head;  
+    }
+    
+    list* prev = NULL;
+    list* p = head;
+    list* next = NULL;
+    
+    while (p != NULL) {
+        next = getnextp(p);
+        setnextp(p, prev);
+        prev = p;
+        p = next;
+    }
+    
+    return prev;
+}
+
+
+// RemoveLL: qui permet de supprimer une valeur « v » dans la liste.
+
+list* RemoveLL(list* head, int v) {
+    if(head == NULL) return NULL;
+    list* q = FindLL(head, v);
+    if(q == NULL) return head;
+    if(q == head) {
+        list* p = getnext(head);
+        free(head);
+        return p;
+    }
+    list* prev = head;
+    while(getnext(prev) != q) prev = getnext(prev);
+    setnext(prev, getnext(q));
+    free(q);
+    return head;
+}
+
+
+		
+//CleanLL : qui permet de détruire la liste.
+
+void cleanLL(list** head)
+{
+    list* q;
+    while (*head != NULL)
+    {
+        q = *head;
+        *head = getnext(*head);
+        free(q);
+    }
+}	
+
+// Program 37: Linked List with Add, Browse, Free, Sort Operations
+----------------tabel pioter------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct tab
+{
+    int val;
+    struct tab * next;
+}tab;
+
+void setval (tab* p,int val) { p->val = val;}
+void setnextp (tab* p,tab* q) { p->next = q;}
+void init (tab* p) { p->next = NULL;}
+tab* getnextp (tab* p) { return p->next ;}
+int  getval (tab* p) { return p->val ;}
+
+void addend (tab* *head,int val);
+void addbig (tab* *head,int val);
+void browslist (tab* head);
+void freelist (tab* *head);
+void sortlist(tab* *head);
+
+
+
+int main() {
+    
+    tab* tete;
+    tete = NULL;
+   
+    addend (&tete,40);
+    addbig (&tete,5550);
+    addend (&tete,30);
+    addbig (&tete,220);
+    addend (&tete,80);
+    addbig (&tete,20);
+    addend (&tete,90);
+    addbig (&tete,10000);
+    
+    printf("\n------------------------ brows list ------------------------ \n");
+    browslist (tete);
+    
+    
+    printf("\n after sorting \n");
+    sortlist(&tete);
+    printf("\n------------------------ brows list ------------------------ \n");
+    browslist (tete);
+   
+   
+   freelist (&tete);
+   printf("\n---------------------------------------------- \n");
+   browslist (tete);
+    return 0;
+}
+
+void addend (tab* *head,int val)
+{
+    tab* q;
+    tab* l;
+    q=(tab*)malloc(sizeof(tab));
+    setval(q,val);
+    init(q);
+    l = *head;
+    if (*head == NULL)
+    {
+       *head = q; 
+    }else
+     {
+        while (getnextp(l) != NULL)
+        {
+            l=getnextp(l);
+        }
+        setnextp(l,q);
+     }    
+}
+
+void addbig (tab* *head,int val)
+{
+    tab* q;
+    q=(tab*)malloc(sizeof(tab));
+    setval(q,val);
+    setnextp(q,*head);
+    *head = q;
+}
+
+void browslist (tab* head)
+{
+    tab* q;
+    q = head;
+    if(q == NULL)
+     {
+        printf("\n EMPTY LIST \n") ;
+     }else 
+        {  
+           while(q != NULL)
+                {
+                    printf("[ %d ]-_->",getval(q));
+                    q = getnextp(q);
+                }
+         }
+}
+
+void freelist (tab* *head)
+{ tab* q;
+ while(*head != NULL)
+  {
+      q = *head;
+      *head = getnextp(*head);
+      free(q);
+   }
+} 
+
+
+void sortlist(tab* *head)
+{
+    tab* p; tab* pprev; tab* pnext;
+    bool swap;
+    if(*head == NULL)
+     {
+         printf("\n <EMPTY-LIST> \n");
+     }else
+        {
+            if((*head)->next == NULL)
+             {
+                 printf("\n <List-of-one-NODE-it's-in-order> \n");
+             }
+              else 
+                {  
+                   swap = true ;
+                  
+                    while(swap)
+                      {    p = *head;
+                           pnext = getnextp(p);
+                          swap = false ;
+                          while(pnext != NULL)
+                          {
+                              if(getval(p) > getval(pnext))
+                                { swap = true;
+                                    if(p == *head)
+                                    {  
+                                       setnextp(p,getnextp(pnext));
+                                       setnextp(pnext,p);
+                                       *head = pnext;
+                                        pnext = getnextp(p);
+                                        pprev = *head;
+                                        
+                                    }else
+                                        {
+                                             setnextp(p,getnextp(pnext));
+                                             setnextp(pprev,pnext);
+                                             setnextp(pnext,p);
+                                             pnext = getnextp(p);
+                                             pprev = getnextp(pprev);
+                                            
+                                        }
+                                }else
+                                  { 
+                                    pprev = p;
+                                    p = pnext;
+                                    pnext = getnextp(p);
+                                   }     
+                            }
+                      }
+                }
+        }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)
