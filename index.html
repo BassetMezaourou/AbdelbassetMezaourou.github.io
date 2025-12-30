@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abdelbasset Mezaourou | Portfolio</title>
+
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        /* =============== THEME VARIABLES =============== */
+        :root {
+            --bg: #050810;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent: #4da3ff;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --glow: 0 0 20px rgba(77, 163, 255, 0.5);
+        }
+
+        /* =============== GLOBAL RESET =============== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* =============== HERO BACKGROUND PULSE (Tech Touch) =============== */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.15;
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.15; }
+            50% { transform: scale(1.2); opacity: 0.08; }
+        }
+
+        /* =============== NAVBAR =============== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 8, 16, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* =============== HERO SECTION =============== */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+            max-width: 1400px;
+            margin: auto;
+            position: relative;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero-text span {
+            color: var(--accent);
+        }
+
+        #typing {
+            height: 24px;
+            color: var(--text-dim);
+            margin: 15px 0;
+            font-size: 1.2rem;
+            border-right: 2px solid var(--accent);
+            display: inline-block;
+            padding-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: var(--accent); }
+            50% { border-color: transparent; }
+        }
+
+        .socials {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .socials a {
+            width: 45px;
+            height: 45px;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .socials a:hover {
+            transform: translateY(-5px) rotate(5deg);
+            background: var(--accent);
+            color: #050810;
+            box-shadow: var(--glow);
+        }
+
+        .share-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            margin-top: 25px;
+        }
+
+        .share-btn:hover {
+            background: var(--accent);
+            color: #050810;
+            box-shadow: 0 0 15px rgba(77, 163, 255, 0.6);
+        }
+
+        .hero-img {
+            position: relative;
+        }
+
+        .hero-img img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 30px rgba(77, 163, 255, 0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .hero-img img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* =============== COMMON SECTION STYLES =============== */
+        section {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--accent);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        /* =============== ABOUT =============== */
+        #about p {
+            max-width: 800px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* =============== SKILLS =============== */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .skill-pill {
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .skill-pill:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            background: rgba(77, 163, 255, 0.07);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* =============== PROJECTS =============== */
+        .project-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), var(--glow);
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            color: var(--text-dim);
+        }
+
+        /* =============== CONTACT =============== */
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title-centered {
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .title-underline {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 10px auto 25px auto;
+            border-radius: 2px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 22px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #eaeaea;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(77, 163, 255, 0.08);
+            border-color: var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), var(--glow);
+        }
+
+        .info-item i {
+            color: var(--accent);
+            font-size: 1.3rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: inset 0 0 5px rgba(77, 163, 255, 0.3);
+        }
+
+        .send-btn {
+            background: var(--accent);
+            color: #050810;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #3a8ee6;
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(77, 163, 255, 0.5);
+        }
+
+        /* =============== TOAST & ANIMATIONS =============== */
+        #copy-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #000;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 800;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.4s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: translateX(-50%) scale(0.8); opacity: 0; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+
+        /* =============== SCROLL REVEAL (Modern) =============== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =============== FOOTER =============== */
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* =============== RESPONSIVE =============== */
+        @media (max-width: 900px) {
+            #home {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 150px;
+                height: auto;
+            }
+            .hero-img img {
+                width: 250px;
+                height: 250px;
+                margin-bottom: 40px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            nav ul {
+                display: none;
+            }
+            .section-title-centered {
+                font-size: 2.3rem;
+            }
+        }
+
+        /* =============== ADMIN PANEL =============== */
+        #admin-panel {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 3000;
+            display: none;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .admin-btn {
+            background: var(--accent);
+            color: #050810;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(77, 163, 255, 0.4);
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .admin-btn:hover {
+            background: #3a8ee6;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Admin Panel -->
+    <div id="admin-panel">
+        <button class="admin-btn" onclick="addProject()">✚ Add Project</button>
+        <button class="admin-btn" onclick="addContactLink()">✚ Add Link</button>
+        <button class="admin-btn" style="background:#ff4d4d;" onclick="exitEditMode()">✕ Exit</button>
+    </div>
+
+    <header>
+        <nav>
+            <a href="#home" class="logo">Abdelbasset Mezaourou </a>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="hero-text">
+            <h1>Hi, I'm <span> Mr.Mezaourou </span></h1>
+            <div id="typing"></div>
+
+            <div class="socials">
+                <a href="tel:+213552887727" title="Call Me"><i class="fas fa-phone"></i></a>
+                <a href="https://github.com/BassetMezaourou" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/abdelbasset-mezaourou-a89317337/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/share/1FHjsJRkG4/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://discord.gg/HWTUHNgW" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://www.instagram.com/bassetmezaourou?igsh=ZTN2cXhxZHR5YzQw&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <button class="share-btn" onclick="copyLink()">
+                <i class="fas fa-share-alt"></i> Share Portfolio
+            </button>
+        </div>
+
+        <div class="hero-img">
+            <img src="C:\Users\Abd El Basset\Desktop\porgrame-sammer\HTML_codes\b.jpg" alt="Abdelbasset Mezaourou" />
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <h2 class="section-title">About Me</h2>
+        <p>
+            I’m a second-year engineering student at Saad Dahlab University in Algeria.
+            I specialize in Computer Science with a deep interest in Full-Stack Development,
+            Robotics, and Cybersecurity. I love building tools that solve real-world problems.
+        </p>
+    </section>
+
+    <section id="skills" class="reveal">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-pill">C / C++</div>
+            <div class="skill-pill">Java</div>
+            <div class="skill-pill">HTML & CSS</div>
+            <div class="skill-pill">JavaScript</div>
+            <div class="skill-pill">Algorithms & Data Structures</div>
+            <div class="skill-pill">Arduino / Robotics</div>
+            <div class="skill-pill">Cybersecurity Basics</div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <h2 class="section-title">My Projects</h2>
+        <!-- Projects rendered dynamically -->
+    </section>
+
+    <section id="contact" class="reveal">
+        <div class="contact-header">
+            <h2 class="section-title-centered">Get In Touch</h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-info">
+                <!-- Static links -->
+                <a href="mailto:abdelbassetmezaourou@gmail.com" class="info-item static-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>abdelbassetmezaourou@gmail.com</span>
+                </a>
+                <a href="tel:+213552887727" class="info-item static-link">
+                    <i class="fas fa-phone"></i>
+                    <span>+213 552 887 727</span>
+                </a>
+                <a href="https://www.linkedin.com/in/abdelbasset-mezaourou-a89317337/" target="_blank" class="info-item static-link">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn Profile</span>
+                </a>
+                <a href="https://github.com/BassetMezaourou" target="_blank" class="info-item static-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub Profile</span>
+                </a>
+                <a href="https://discord.gg/HWTUHNgW" target="_blank" class="info-item static-link">
+                    <i class="fab fa-discord"></i>
+                    <span>Join my Discord</span>
+                </a>
+                <a href="https://www.instagram.com/abdelbasset_mezaourou/" target="_blank" class="info-item static-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <!-- Dynamic links appended here -->
+            </div>
+
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required />
+                <input type="email" placeholder="Your Email" required />
+                <textarea placeholder="Your Message" rows="6" required></textarea>
+                <button type="submit" class="send-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <div id="copy-toast">Link Copied!</div>
+
+    <footer>
+        <p>© 2025 Abdelbasset Mezaourou • </p>
+    </footer>
+
+    <script>
+        // === ADMIN MODE ===
+        let editMode = false;
+        document.addEventListener('keydown', (e) => {
+            if (e.shiftKey && e.key === 'E') {
+                editMode = !editMode;
+                document.getElementById('admin-panel').style.display = editMode ? 'flex' : 'none';
+            }
+        });
+
+        function exitEditMode() {
+            editMode = false;
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+
+        // === DATA STORAGE ===
+        let projects = JSON.parse(localStorage.getItem('projects')) || [
+            {
+                title: "Smart Home Automation System",
+                desc: "Built a Wi-Fi-controlled home lighting & climate system using ESP32 and Firebase. Integrated voice commands via Android app and real-time monitoring dashboard."
+            },
+            {
+                title: "University Course Scheduler",
+                desc: "A full-stack web app that helps students auto-generate conflict-free timetables using greedy algorithms. Tech: React, Node.js, MongoDB."
+            }
+        ];
+
+        let contactLinks = JSON.parse(localStorage.getItem('contactLinks')) || [];
+
+        function saveData() {
+            localStorage.setItem('projects', JSON.stringify(projects));
+            localStorage.setItem('contactLinks', JSON.stringify(contactLinks));
+            renderProjects();
+            renderContactLinks();
+        }
+
+        // === ADD FUNCTIONS ===
+        function addProject() {
+            const title = prompt("Project title:");
+            const desc = prompt("Project description:");
+            if (title && desc) {
+                projects.push({ title, desc });
+                saveData();
+            }
+        }
+
+        function addContactLink() {
+            const label = prompt("Link label (e.g., 'YouTube'):");
+            const url = prompt("Full URL:");
+            const icon = prompt("Font Awesome icon class (e.g., fab fa-youtube):");
+            if (label && url && icon) {
+                contactLinks.push({ label, url, icon });
+                saveData();
+            }
+        }
+
+        // === RENDERERS ===
+        function renderProjects() {
+            const container = document.getElementById('projects');
+            container.innerHTML = '<h2 class="section-title">My Projects</h2>';
+            projects.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `<h3>${p.title}</h3><p>${p.desc}</p>`;
+                container.appendChild(card);
+            });
+        }
+
+        function renderContactLinks() {
+            const container = document.querySelector('.contact-info');
+            const staticLinks = container.querySelectorAll('.static-link');
+            container.innerHTML = '';
+            staticLinks.forEach(link => container.appendChild(link));
+            contactLinks.forEach(link => {
+                const el = document.createElement('a');
+                el.href = link.url.trim();
+                el.target = '_blank';
+                el.className = 'info-item';
+                el.innerHTML = `<i class="${link.icon}"></i><span>${link.label}</span>`;
+                container.appendChild(el);
+            });
+        }
+
+        // === TYPING ANIMATION ===
+        const textArr = [
+            "Computer Science Student",
+            "Full-Stack Developer",
+            "Robotics Enthusiast",
+            "Cybersecurity Learner"
+        ];
+        let count = 0, index = 0, isDeleting = false;
+
+        function type() {
+            const current = textArr[count];
+            const typingElement = document.getElementById("typing");
+            typingElement.textContent = isDeleting
+                ? current.substring(0, index - 1)
+                : current.substring(0, index + 1);
+            index = isDeleting ? index - 1 : index + 1;
+
+            let speed = isDeleting ? 50 : 100;
+            if (!isDeleting && index === current.length) {
+                speed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && index === 0) {
+                isDeleting = false;
+                count = (count + 1) % textArr.length;
+            }
+            setTimeout(type, speed);
+        }
+
+        // === MODERN SCROLL REVEAL (Intersection Observer) ===
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // === COPY LINK ===
+        function copyLink() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({ title: 'Abdelbasset Portfolio', url }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(url).then(() => {
+                    const toast = document.getElementById('copy-toast');
+                    toast.style.display = 'block';
+                    setTimeout(() => toast.style.display = 'none', 2500);
+                });
+            }
+        }
+
+        // === INIT ===
+        document.addEventListener('DOMContentLoaded', () => {
+            type();
+            renderProjects();
+            renderContactLinks();
+        });
+    </script>
+</body>
+</html>
