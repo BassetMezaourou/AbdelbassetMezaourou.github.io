@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
 
     <style>
-        /* =============== THEME VARIABLES =============== */
+        /* =============== (All your existing styles stay the same) =============== */
         :root {
             --bg: #050810;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -21,7 +21,6 @@
             --glow: 0 0 20px rgba(77, 163, 255, 0.5);
         }
 
-        /* =============== GLOBAL RESET =============== */
         * {
             margin: 0;
             padding: 0;
@@ -41,7 +40,6 @@
             position: relative;
         }
 
-        /* =============== HERO BACKGROUND PULSE (Tech Touch) =============== */
         body::before {
             content: '';
             position: absolute;
@@ -61,7 +59,6 @@
             50% { transform: scale(1.2); opacity: 0.08; }
         }
 
-        /* =============== NAVBAR =============== */
         header {
             position: fixed;
             top: 0;
@@ -105,7 +102,6 @@
             color: var(--accent);
         }
 
-        /* =============== HERO SECTION =============== */
         #home {
             height: 100vh;
             display: flex;
@@ -193,10 +189,6 @@
             box-shadow: 0 0 15px rgba(77, 163, 255, 0.6);
         }
 
-        .hero-img {
-            position: relative;
-        }
-
         .hero-img img {
             width: 300px;
             height: 300px;
@@ -211,7 +203,6 @@
             transform: scale(1.05) rotate(2deg);
         }
 
-        /* =============== COMMON SECTION STYLES =============== */
         section {
             padding: 100px 10%;
             max-width: 1400px;
@@ -236,7 +227,6 @@
             border-radius: 2px;
         }
 
-        /* =============== ABOUT =============== */
         #about p {
             max-width: 800px;
             color: var(--text-dim);
@@ -244,7 +234,6 @@
             line-height: 1.7;
         }
 
-        /* =============== SKILLS =============== */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
@@ -258,7 +247,7 @@
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: var(--transition);
-            cursor: default;
+            cursor: pointer;
         }
 
         .skill-pill:hover {
@@ -268,7 +257,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* =============== PROJECTS =============== */
         .project-card {
             background: var(--card-bg);
             padding: 30px;
@@ -294,7 +282,6 @@
             color: var(--text-dim);
         }
 
-        /* =============== CONTACT =============== */
         .contact-header {
             text-align: center;
             margin-bottom: 60px;
@@ -392,7 +379,6 @@
             box-shadow: 0 5px 20px rgba(77, 163, 255, 0.5);
         }
 
-        /* =============== TOAST & ANIMATIONS =============== */
         #copy-toast {
             position: fixed;
             bottom: 30px;
@@ -414,7 +400,6 @@
             100% { transform: translateX(-50%) scale(1); opacity: 1; }
         }
 
-        /* =============== SCROLL REVEAL (Modern) =============== */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -426,7 +411,6 @@
             transform: translateY(0);
         }
 
-        /* =============== FOOTER =============== */
         footer {
             text-align: center;
             padding: 50px;
@@ -435,7 +419,6 @@
             font-size: 0.95rem;
         }
 
-        /* =============== RESPONSIVE =============== */
         @media (max-width: 900px) {
             #home {
                 flex-direction: column-reverse;
@@ -459,7 +442,6 @@
             }
         }
 
-        /* =============== ADMIN PANEL =============== */
         #admin-panel {
             position: fixed;
             top: 15px;
@@ -487,6 +469,98 @@
             background: #3a8ee6;
             transform: scale(1.05);
         }
+
+        /* =============== REUSABLE SKILL MODAL =============== */
+        .skill-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #0a0f1d;
+            color: #e0f0ff;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--accent);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(77, 163, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 16px 24px;
+            background: rgba(77, 163, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .code-block {
+            background: #050a15;
+            padding: 18px;
+            border-radius: 10px;
+            font-family: 'Courier New', Consolas, monospace;
+            white-space: pre;
+            overflow-x: auto;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            color: #8ae28a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-height: 60vh;
+        }
     </style>
 </head>
 
@@ -495,6 +569,7 @@
     <div id="admin-panel">
         <button class="admin-btn" onclick="addProject()">✚ Add Project</button>
         <button class="admin-btn" onclick="addContactLink()">✚ Add Link</button>
+        <button class="admin-btn" onclick="addSkill()">✚ Add Skill</button>
         <button class="admin-btn" style="background:#ff4d4d;" onclick="exitEditMode()">✕ Exit</button>
     </div>
 
@@ -531,7 +606,7 @@
         </div>
 
         <div class="hero-img">
-            <img src="C:\Users\Abd El Basset\Desktop\porgrame-sammer\HTML_codes\b.jpg" alt="Abdelbasset Mezaourou" />
+            <img src="https://raw.githubusercontent.com/BassetMezaourou/AbdelbassetMezaourou.github.io/main/b.JPG" alt="Abdelbasset Mezaourou" />
         </div>
     </section>
 
@@ -546,14 +621,8 @@
 
     <section id="skills" class="reveal">
         <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-container">
-            <div class="skill-pill">C / C++</div>
-            <div class="skill-pill">Java</div>
-            <div class="skill-pill">HTML & CSS</div>
-            <div class="skill-pill">JavaScript</div>
-            <div class="skill-pill">Algorithms & Data Structures</div>
-            <div class="skill-pill">Arduino / Robotics</div>
-            <div class="skill-pill">Cybersecurity Basics</div>
+        <div class="skills-container" id="skills-container">
+            <!-- Skills will be rendered here -->
         </div>
     </section>
 
@@ -570,7 +639,6 @@
 
         <div class="contact-grid">
             <div class="contact-info">
-                <!-- Static links -->
                 <a href="mailto:abdelbassetmezaourou@gmail.com" class="info-item static-link">
                     <i class="fas fa-envelope"></i>
                     <span>abdelbassetmezaourou@gmail.com</span>
@@ -595,7 +663,6 @@
                     <i class="fab fa-instagram"></i>
                     <span>Instagram</span>
                 </a>
-                <!-- Dynamic links appended here -->
             </div>
 
             <form class="contact-form">
@@ -608,6 +675,19 @@
     </section>
 
     <div id="copy-toast">Link Copied!</div>
+
+    <!-- Reusable Modal (one for all skills) -->
+    <div id="skill-modal" class="skill-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-skill-title"><i class="fas fa-code"></i> Skill Code</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre><code id="modal-code" class="code-block">Loading...</code></pre>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>© 2025 Abdelbasset Mezaourou • </p>
@@ -641,12 +721,25 @@
         ];
 
         let contactLinks = JSON.parse(localStorage.getItem('contactLinks')) || [];
+        
+        // ✅ NEW: Skills data
+        let skills = JSON.parse(localStorage.getItem('skills')) || [
+            { name: "C / C++", fileUrl: "https://raw.githubusercontent.com/BassetMezaourou/Smart-Home-Automation/main/ESP32_Controller.ino" },
+            { name: "Java", fileUrl: "https://raw.githubusercontent.com/BassetMezaourou/University-Course-Scheduler/main/App.java" },
+            { name: "HTML & CSS", fileUrl: "https://raw.githubusercontent.com/BassetMezaourou/Portfolio/main/index.html" },
+            { name: "JavaScript", fileUrl: "https://raw.githubusercontent.com/BassetMezaourou/Portfolio/main/script.js" },
+            { name: "Algorithms & Data Structures", fileUrl: "https://raw.githubusercontent.com/BassetMezaourou/DSA/main/linked_list.c" },
+            { name: "Arduino / Robotics", fileUrl: "https://raw.githubusercontent.com/BassetMezaourou/RobotArm/main/robot_arm.ino" },
+            { name: "Cybersecurity Basics", fileUrl: "https://raw.githubusercontent.com/BassetMezaourou/CyberNotes/main/nmap_cheatsheet.txt" }
+        ];
 
         function saveData() {
             localStorage.setItem('projects', JSON.stringify(projects));
             localStorage.setItem('contactLinks', JSON.stringify(contactLinks));
+            localStorage.setItem('skills', JSON.stringify(skills)); // ✅ Save skills
             renderProjects();
             renderContactLinks();
+            renderSkills();
         }
 
         // === ADD FUNCTIONS ===
@@ -665,6 +758,16 @@
             const icon = prompt("Font Awesome icon class (e.g., fab fa-youtube):");
             if (label && url && icon) {
                 contactLinks.push({ label, url, icon });
+                saveData();
+            }
+        }
+
+        // ✅ NEW: Add Skill
+        function addSkill() {
+            const name = prompt("Skill name (e.g., Python):");
+            const fileUrl = prompt("Public file URL (GitHub raw link):");
+            if (name && fileUrl) {
+                skills.push({ name, fileUrl });
                 saveData();
             }
         }
@@ -696,6 +799,21 @@
             });
         }
 
+        // ✅ NEW: Render Skills
+        function renderSkills() {
+            const container = document.getElementById('skills-container');
+            container.innerHTML = '';
+            skills.forEach(skill => {
+                const pill = document.createElement('div');
+                pill.className = 'skill-pill';
+                pill.textContent = skill.name;
+                pill.dataset.fileUrl = skill.fileUrl;
+                pill.dataset.name = skill.name;
+                pill.addEventListener('click', openSkillModal);
+                container.appendChild(pill);
+            });
+        }
+
         // === TYPING ANIMATION ===
         const textArr = [
             "Computer Science Student",
@@ -724,7 +842,7 @@
             setTimeout(type, speed);
         }
 
-        // === MODERN SCROLL REVEAL (Intersection Observer) ===
+        // === MODERN SCROLL REVEAL ===
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -749,11 +867,44 @@
             }
         }
 
+        // ✅ NEW: Reusable Skill Modal
+        function openSkillModal(e) {
+            const skillName = e.target.dataset.name;
+            const fileUrl = e.target.dataset.fileUrl;
+            const modal = document.getElementById('skill-modal');
+            const titleEl = document.getElementById('modal-skill-title');
+            const codeEl = document.getElementById('modal-code');
+
+            titleEl.innerHTML = `<i class="fas fa-code"></i> ${skillName} Code`;
+            codeEl.textContent = 'Loading...';
+            modal.classList.add('active');
+
+            fetch(fileUrl)
+                .then(res => res.ok ? res.text() : Promise.reject('File not found'))
+                .then(content => codeEl.textContent = content)
+                .catch(err => {
+                    codeEl.textContent = `❌ Error loading file:\n${err}\n\n💡 Tip: Use a public GitHub raw URL.`;
+                    console.error(err);
+                });
+        }
+
+        // Close modal
+        document.querySelector('#skill-modal .close-modal').addEventListener('click', () => {
+            document.getElementById('skill-modal').classList.remove('active');
+        });
+
+        document.getElementById('skill-modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('skill-modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
         // === INIT ===
         document.addEventListener('DOMContentLoaded', () => {
             type();
             renderProjects();
             renderContactLinks();
+            renderSkills(); // ✅ Render skills on load
         });
     </script>
 </body>
