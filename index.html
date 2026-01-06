@@ -233,52 +233,68 @@
             line-height: 1.7;
         }
 
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
+        /* New Experience Section Styles */
+        #experience {
+            padding: 100px 10%;
+            max-width: 1400px;
+            margin: auto;
         }
 
-        .skill-pill {
-            background: var(--card-bg);
-            padding: 10px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .skill-pill:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-            background: rgba(77, 163, 255, 0.07);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .project-card {
+        .experience-card {
             background: var(--card-bg);
             padding: 30px;
             border-radius: 20px;
-            margin-bottom: 25px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: var(--transition);
         }
 
-        .project-card:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .experience-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), var(--glow);
         }
 
-        .project-card h3 {
+        .experience-card h3 {
             color: var(--accent);
-            margin-bottom: 12px;
-            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
         }
 
-        .project-card p {
+        .experience-card h4 {
+            font-size: 1.2rem;
+            margin: 15px 0 5px 0;
+            color: var(--text-main);
+        }
+
+        .experience-card p {
             color: var(--text-dim);
+            margin-bottom: 15px;
+        }
+
+        .skill-bar-container {
+            margin: 20px 0;
+        }
+
+        .skill-bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .skill-bar-background {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            transition: width 0.8s ease-in-out;
         }
 
         .contact-header {
@@ -438,6 +454,13 @@
             }
             .section-title-centered {
                 font-size: 2.3rem;
+            }
+            #experience > div {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .experience-card {
+                max-width: 100% !important;
             }
         }
 
@@ -610,8 +633,7 @@
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -625,7 +647,7 @@
             <div class="socials">
                 <a href="tel:+213552887727" title="Call Me"><i class="fas fa-phone"></i></a>
                 <a href="https://github.com/BassetMezaourou" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/abdelbasset-mezaourou-a89317337/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/abdelbasset-mezaourou-a89317337" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://www.facebook.com/share/1FHjsJRkG4/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
                 <a href="https://discord.gg/HWTUHNgW" target="_blank"><i class="fab fa-discord"></i></a>
                 <a href="https://www.instagram.com/bassetmezaourou?igsh=ZTN2cXhxZHR5YzQw&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -650,16 +672,62 @@
         </p>
     </section>
 
-    <section id="skills" class="reveal">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-container" id="skills-container">
-            <!-- Skills will be rendered here -->
-        </div>
-    </section>
+    <!-- === EXPERIENCE SECTION === -->
+    <section id="experience" class="reveal">
+        <h2 class="section-title">My Experience</h2>
+        <div style="display:flex;gap:30px;flex-wrap:wrap;justify-content:center;">
+            <!-- Education & Skills Card -->
+            <div class="experience-card" style="flex:1;min-width:300px;max-width:400px;">
+                <h3>Education & Skills</h3>
+                <h4>Computer Science Student</h4>
+                <p>2024 – Present</p>
+                <p>Second-year engineering student at Saad Dahlab University, Algeria.</p>
+                <hr style="margin:20px 0;border:none;border-top:1px solid rgba(255,255,255,0.1);">
+                <h4>Technical Skills</h4>
+                <p>Full-Stack Development, Robotics, Cybersecurity.</p>
+            </div>
 
-    <section id="projects" class="reveal">
-        <h2 class="section-title">My Projects</h2>
-        <!-- Projects rendered dynamically -->
+            <!-- Skills Card -->
+            <div class="experience-card" style="flex:1;min-width:300px;max-width:400px;">
+                <h3>Skills</h3>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-label"><span>C Language</span><span>85%</span></div>
+                    <div class="skill-bar-background"><div class="skill-bar-fill" style="width:85%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-label"><span>Java</span><span>60%</span></div>
+                    <div class="skill-bar-background"><div class="skill-bar-fill" style="width:60%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-label"><span>HTML & CSS</span><span>20%</span></div>
+                    <div class="skill-bar-background"><div class="skill-bar-fill" style="width:20%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-label"><span>JavaScript</span><span>0%</span></div>
+                    <div class="skill-bar-background"><div class="skill-bar-fill" style="width:0%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-label"><span>Algorithms & Data Structures</span><span>65%</span></div>
+                    <div class="skill-bar-background"><div class="skill-bar-fill" style="width:65%;"></div></div>
+                </div>
+                <div class="skill-bar-container">
+                    <div class="skill-bar-label"><span>Arduino / Robotics</span><span>10%</span></div>
+                    <div class="skill-bar-background"><div class="skill-bar-fill" style="width:10%;"></div></div>
+                </div>
+            </div>
+
+            <!-- Awards Card -->
+            <div class="experience-card" style="flex:1;min-width:300px;max-width:400px;">
+                <h3>Awards</h3>
+                <h4>Best Student Project</h4>
+                <p>2024</p>
+                <p>Awarded for the Smart Home Automation System project at Saad Dahlab University.</p>
+                <hr style="margin:20px 0;border:none;border-top:1px solid rgba(255,255,255,0.1);">
+                <h4>University Scholarship</h4>
+                <p>2023</p>
+                <p>Received for academic excellence in the first year of engineering.</p>
+            </div>
+        </div>
     </section>
 
     <section id="contact" class="reveal">
@@ -678,7 +746,7 @@
                     <i class="fas fa-phone"></i>
                     <span>+213 552 887 727</span>
                 </a>
-                <a href="https://www.linkedin.com/in/abdelbasset-mezaourou-a89317337/" target="_blank" class="info-item static-link">
+                <a href="https://www.linkedin.com/in/abdelbasset-mezaourou-a89317337" target="_blank" class="info-item static-link">
                     <i class="fab fa-linkedin"></i>
                     <span>LinkedIn Profile</span>
                 </a>
@@ -690,7 +758,7 @@
                     <i class="fab fa-discord"></i>
                     <span>Join my Discord</span>
                 </a>
-                <a href="https://www.instagram.com/abdelbasset_mezaourou/" target="_blank" class="info-item static-link">
+                <a href="https://www.instagram.com/bassetmezaourou?igsh=ZTN2cXhxZHR5YzQw&utm_source=qr" target="_blank" class="info-item static-link">
                     <i class="fab fa-instagram"></i>
                     <span>Instagram</span>
                 </a>
@@ -738,79 +806,6 @@
     </footer>
 
     <script>
-        // === DATA ===
-        let projects = [
-            {
-                title: "Smart Home Automation System",
-                desc: "Built a Wi-Fi-controlled home lighting & climate system using ESP32 and Firebase. Integrated voice commands via Android app and real-time monitoring dashboard."
-            },
-            {
-                title: "University Course Scheduler",
-                desc: "A full-stack web app that helps students auto-generate conflict-free timetables using greedy algorithms. Tech: React, Node.js, MongoDB."
-            }
-        ];
-
-        let skills = [
-            {
-                name: "C language",
-                files: [
-                    { name: "Function", url: "https://raw.githubusercontent.com/BassetMezaourou/AbdelbassetMezaourou.github.io/refs/heads/main/function.txt", type: "txt" },
-                ]
-            },
-            {
-                name: "Java",
-                files: []
-            },
-            {
-                name: "HTML & CSS",
-                files: []
-            },
-            {
-                name: "JavaScript",
-                files: []
-            },
-            {
-                name: "Algorithms & Data Structures",
-                files: []
-            },
-            {
-                name: "Arduino / Robotics",
-                files: []
-            },
-            {
-                name: "Cybersecurity Basics",
-                files: []
-            }
-        ];
-
-        // === STATE ===
-        let currentFileUrl = '';
-        let currentFileName = '';
-
-        // === RENDERERS ===
-        function renderProjects() {
-            const container = document.getElementById('projects');
-            container.innerHTML = '<h2 class="section-title">My Projects</h2>';
-            projects.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.innerHTML = `<h3>${p.title}</h3><p>${p.desc}</p>`;
-                container.appendChild(card);
-            });
-        }
-
-        function renderSkills() {
-            const container = document.getElementById('skills-container');
-            container.innerHTML = '';
-            skills.forEach(skill => {
-                const pill = document.createElement('div');
-                pill.className = 'skill-pill';
-                pill.textContent = skill.name;
-                pill.addEventListener('click', () => openSkillModal(skill));
-                container.appendChild(pill);
-            });
-        }
-
         // === TYPING ANIMATION ===
         const textArr = [
             "Computer Science Student",
@@ -971,8 +966,6 @@
         // === INIT ===
         document.addEventListener('DOMContentLoaded', () => {
             type();
-            renderProjects();
-            renderSkills();
         });
     </script>
 </body>
